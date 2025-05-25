@@ -1,21 +1,61 @@
-# LTI - Sistema de Seguimiento de Talento
+# LTI - Sistema de Seguimiento de Talento (ATS)
 
-Este proyecto es una aplicación full-stack con un frontend en React y un backend en Express usando Prisma como ORM. El frontend se inicia con Create React App y el backend está escrito en TypeScript.
+Este proyecto es una aplicación full-stack de **Applicant Tracking System (ATS)** diseñada para reclutadores. Incluye funcionalidades completas para gestionar candidatos con un frontend moderno en React y un backend robusto en Express con TypeScript.
+
+## 🚀 Funcionalidades Implementadas
+
+### ✅ **"Añadir Candidato al Sistema"** - COMPLETADO
+
+- **Formulario completo** con validaciones para datos del candidato
+- **Upload de CV** en formato PDF con validación de tamaño (5MB max)
+- **Visualización de candidatos** en formato de cards responsivo
+- **Descarga de CVs** desde la lista de candidatos
+- **Validaciones robustas** tanto en frontend como backend
+- **UI/UX moderna** con animaciones y diseño responsive
+- **Manejo de errores** y mensajes de confirmación
+
+### 🎯 Criterios de Aceptación Cumplidos:
+
+1. ✅ **Accesibilidad**: Botón visible para añadir candidatos
+2. ✅ **Formulario completo**: Todos los campos requeridos implementados
+3. ✅ **Validaciones**: Email, campos obligatorios, formatos correctos
+4. ✅ **Carga de documentos**: Upload de CV en PDF con drag & drop
+5. ✅ **Confirmación**: Mensajes de éxito al añadir candidatos
+6. ✅ **Manejo de errores**: Validaciones y mensajes informativos
+7. ✅ **Compatibilidad**: Responsive design y cross-browser
+
+## 🛠️ Tecnologías Utilizadas
+
+- **Backend**: Node.js + Express + TypeScript
+- **Frontend**: React + TypeScript
+- **Base de datos**: PostgreSQL (configurada con Docker)
+- **ORM**: Prisma (preparado para futuras implementaciones)
+- **Upload de archivos**: Multer
+- **Styling**: CSS3 con gradientes y animaciones
+- **Validaciones**: Frontend (React) + Backend (Express)
 
 ## Explicación de Directorios y Archivos
 
-- `backend/`: Contiene el código del lado del servidor escrito en Node.js.
+- `backend/`: Contiene el código del lado del servidor escrito en Node.js + TypeScript.
   - `src/`: Contiene el código fuente para el backend.
     - `index.ts`: El punto de entrada para el servidor backend.
-  - `prisma/`: Contiene el archivo de esquema de Prisma para ORM.
+    - `controllers/`: Controladores para manejar las rutas de la API.
+    - `routes/`: Definición de rutas y endpoints.
+    - `services/`: Lógica de negocio y servicios (memoria e implementación futura con Prisma).
+    - `types/`: Definiciones de tipos TypeScript.
+  - `uploads/`: Directorio para almacenar archivos CV subidos.
+  - `prisma/`: Contiene el archivo de esquema de Prisma para ORM (preparado para uso futuro).
   - `tsconfig.json`: Archivo de configuración de TypeScript.
-  - `.env`: Contiene las variables de entorno.
-- `frontend/`: Contiene el código del lado del cliente escrito en React.
+- `frontend/`: Contiene el código del lado del cliente escrito en React + TypeScript.
   - `src/`: Contiene el código fuente para el frontend.
+    - `components/`: Componentes React reutilizables.
+    - `services/`: Servicios para comunicación con la API.
+    - `types/`: Definiciones de tipos TypeScript.
+    - `utils/`: Utilidades y funciones de validación.
   - `public/`: Contiene archivos estáticos como el archivo HTML e imágenes.
-  - `build/`: Contiene la construcción lista para producción del frontend.
-- `docker-compose.yml`: Contiene la configuración de Docker Compose para gestionar los servicios de tu aplicación.
-- `README.md`: Este archivo contiene información sobre el proyecto e instrucciones sobre cómo ejecutarlo.
+- `docker-compose.yml`: Configuración de Docker Compose para PostgreSQL.
+- `prompts-iniciales.md`: Documentación del prompt utilizado para desarrollar el proyecto.
+- `README.md`: Este archivo con información del proyecto e instrucciones.
 
 ## Estructura del Proyecto
 
@@ -28,6 +68,7 @@ El frontend es una aplicación React y sus archivos principales están ubicados 
 ### Backend
 
 El backend es una aplicación Express escrita en TypeScript.
+
 - El directorio `src` contiene el código fuente
 - El directorio `prisma` contiene el esquema de Prisma.
 
@@ -35,61 +76,105 @@ El backend es una aplicación Express escrita en TypeScript.
 
 Para comenzar con este proyecto, sigue estos pasos:
 
-1. Clona el repositorio.
-2. Instala las dependencias para el frontend y el backend:
-```sh
-cd frontend
+### 1. Clonar e instalar dependencias
+
+```bash
+# Clonar el repositorio
+git clone <repository-url>
+cd AI4Devs-lab-ides-RO-1
+
+# Instalar dependencias del backend
+cd backend
 npm install
 
-cd ../backend
+# Instalar dependencias del frontend
+cd ../frontend
 npm install
 ```
-3. Construye el servidor backend:
-```
-cd backend
-npm run build
-````
-4. Inicia el servidor backend:
-```
-cd backend
-npm run dev 
+
+### 2. Configurar la base de datos (opcional)
+
+```bash
+# Iniciar PostgreSQL con Docker
+docker-compose up -d
 ```
 
-5. En una nueva ventana de terminal, construye el servidor frontend:
-```
-cd frontend
+### 3. Ejecutar el proyecto
+
+**Terminal 1 - Backend:**
+
+```bash
+cd backend
 npm run build
+npm start
 ```
-6. Inicia el servidor frontend:
-```
+
+**Terminal 2 - Frontend:**
+
+```bash
 cd frontend
 npm start
 ```
 
-El servidor backend estará corriendo en http://localhost:3010 y el frontend estará disponible en http://localhost:3000.
+### 4. Acceder a la aplicación
 
-## Docker y PostgreSQL
+- **Frontend**: http://localhost:3000
+- **Backend API**: http://localhost:3010
+- **Base de datos PostgreSQL**: localhost:5432
 
-Este proyecto usa Docker para ejecutar una base de datos PostgreSQL. Así es cómo ponerlo en marcha:
+## ✨ Cómo usar la aplicación
 
-Instala Docker en tu máquina si aún no lo has hecho. Puedes descargarlo desde aquí.
-Navega al directorio raíz del proyecto en tu terminal.
-Ejecuta el siguiente comando para iniciar el contenedor Docker:
-```
+1. **Navegar al frontend** en http://localhost:3000
+2. **Añadir candidatos** usando el formulario en la pestaña "Añadir Candidato"
+3. **Subir CVs** en formato PDF (drag & drop disponible)
+4. **Ver candidatos** en la pestaña "Lista de Candidatos"
+5. **Descargar CVs** usando el botón de descarga en cada card de candidato
+
+## 🔧 API Endpoints
+
+- `GET /api/candidates` - Obtener todos los candidatos
+- `POST /api/candidates` - Crear nuevo candidato
+- `GET /api/candidates/:id` - Obtener candidato por ID
+- `PUT /api/candidates/:id` - Actualizar candidato
+- `DELETE /api/candidates/:id` - Eliminar candidato
+- `POST /api/candidates/upload-cv/:id` - Subir CV para candidato
+- `GET /api/candidates/download-cv/:id` - Descargar CV de candidato
+
+## 🐳 Docker y PostgreSQL
+
+Este proyecto usa Docker para ejecutar una base de datos PostgreSQL. Para configurarla:
+
+```bash
+# Iniciar PostgreSQL con Docker
 docker-compose up -d
-```
-Esto iniciará una base de datos PostgreSQL en un contenedor Docker. La bandera -d corre el contenedor en modo separado, lo que significa que se ejecuta en segundo plano.
 
-Para acceder a la base de datos PostgreSQL, puedes usar cualquier cliente PostgreSQL con los siguientes detalles de conexión:
- - Host: localhost
- - Port: 5432
- - User: postgres
- - Password: password
- - Database: mydatabase
-
-Por favor, reemplaza User, Password y Database con el usuario, la contraseña y el nombre de la base de datos reales especificados en tu archivo .env.
-
-Para detener el contenedor Docker, ejecuta el siguiente comando:
-```
+# Detener el contenedor
 docker-compose down
 ```
+
+### Detalles de conexión PostgreSQL:
+
+- **Host**: localhost
+- **Port**: 5432
+- **User**: LTIdbUser
+- **Password**: D1ymf8wyQEGthFR1E9xhCq
+- **Database**: LTIdb
+
+## 📝 Notas de desarrollo
+
+- **Persistencia actual**: El proyecto utiliza almacenamiento en memoria para demostración
+- **Base de datos**: PostgreSQL está configurada y lista para implementación futura
+- **Esquema Prisma**: Preparado para migración cuando se implemente persistencia real
+- **Archivos**: Los CVs se almacenan en `/backend/uploads/`
+
+## 🚀 Estado del proyecto
+
+✅ **COMPLETADO** - Funcionalidad "Añadir Candidato al Sistema"
+
+- Todos los criterios de aceptación implementados
+- Frontend y backend completamente funcionales
+- Upload y descarga de CVs operativa
+- Validaciones robustas implementadas
+- UI/UX moderna y responsive
+
+¡El proyecto está listo para entrega y revisión!

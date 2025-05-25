@@ -1,0 +1,40 @@
+import { getPrisma } from '../index';
+import { CandidateCreateInput, CandidateUpdateInput } from '../types/candidate.types';
+
+export const createCandidate = async (candidateData: CandidateCreateInput) => {
+  const prisma = getPrisma();
+  return prisma.candidate.create({
+    data: candidateData,
+  });
+};
+
+export const getAllCandidates = async () => {
+  const prisma = getPrisma();
+  return prisma.candidate.findMany({
+    orderBy: {
+      createdAt: 'desc',
+    },
+  });
+};
+
+export const getCandidateById = async (id: number) => {
+  const prisma = getPrisma();
+  return prisma.candidate.findUnique({
+    where: { id },
+  });
+};
+
+export const updateCandidate = async (id: number, candidateData: CandidateUpdateInput) => {
+  const prisma = getPrisma();
+  return prisma.candidate.update({
+    where: { id },
+    data: candidateData,
+  });
+};
+
+export const deleteCandidate = async (id: number) => {
+  const prisma = getPrisma();
+  return prisma.candidate.delete({
+    where: { id },
+  });
+};

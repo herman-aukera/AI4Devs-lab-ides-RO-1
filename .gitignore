@@ -16,6 +16,15 @@
 **/build
 **/dist
 
+# uploads
+**/uploads/*.pdf
+**/uploads/*.docx
+!**/uploads/.gitkeep
+
+# test files
+test-cv.pdf
+test-cv.txt
+
 # logs
 npm-debug.log*
 yarn-debug.log*

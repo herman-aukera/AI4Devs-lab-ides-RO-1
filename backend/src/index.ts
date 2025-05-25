@@ -1,24 +1,35 @@
 import { Request, Response, NextFunction } from 'express';
 import express from 'express';
-import { PrismaClient } from '@prisma/client';
 import dotenv from 'dotenv';
+import cors from 'cors';
+import apiRoutes from './routes';
 
 dotenv.config();
-const prisma = new PrismaClient();
 
 export const app = express();
-export default prisma;
 
 const port = 3010;
 
+// Middleware
+app.use(cors()); // Enable CORS for frontend communication
+app.use(express.json()); // Parse JSON request bodies
+app.use(express.urlencoded({ extended: true })); // Parse URL-encoded bodies
+
+// Routes
 app.get('/', (req, res) => {
   res.send('Hola LTI!');
 });
 
+// API routes
+app.use('/api', apiRoutes);
+
+// Error handling middleware
 app.use((err: any, req: Request, res: Response, next: NextFunction) => {
   console.error(err.stack);
-  res.type('text/plain'); 
-  res.status(500).send('Something broke!');
+  res.status(500).json({
+    message: 'Internal server error',
+    error: process.env.NODE_ENV === 'development' ? err.message : 'Something went wrong'
+  });
 });
 
 app.listen(port, () => {
